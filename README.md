@@ -136,7 +136,7 @@ const rendered = template.render();
 
 Mustache + MustacheParser
 -------------------------
-Parse and render [Mustache templates](https://mustache.github.io/mustache.5.html) statements, but dynamically at runtime.
+Parse and render [Mustache templates](https://mustache.github.io/mustache.5.html), but dynamically at runtime.
 
 ```js
 import { Mustache } from '@environment-safe/tag-parser/mustache';
