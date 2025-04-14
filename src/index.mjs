@@ -10,4 +10,12 @@ const ensureRequire = ()=> (!internalRequire) && (internalRequire = mod.createRe
 /**
  * A JSON object
  * @typedef { object } JSON
- */
+*/
+
+import { SimpleParser } from './simple.mjs';
+import { TagParser } from './tag.mjs';
+import { HTMLParser } from './html.mjs';
+import { TemplateParser, Template } from './template.mjs';
+
+export { SimpleParser, TagParser, HTMLParser, TemplateParser, Template };
+//import { ExtendedEmitter } from '@environment-safe/event-emitter';
