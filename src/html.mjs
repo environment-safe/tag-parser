@@ -27,7 +27,7 @@ export class HTMLParser extends TagParser{
                         if(matched.name.toLowerCase() !== tag.name.toLowerCase()) throw('strict parse error!');
                         if(parser.text != ''){
                             pushChild(matched, parser.text);
-                            parser.text = ''
+                            parser.text = '';
                         }
                         pushChild(this.tagStack[this.tagStack.length-1], matched);
                     }else{
@@ -41,7 +41,7 @@ export class HTMLParser extends TagParser{
     }
     parse(html){
         this.tagStack = [{}];
-        var result = TagParser.prototype.parse.apply(this, arguments);
+        TagParser.prototype.parse.apply(this, arguments);
         return this.tagStack[0];
     }
 }

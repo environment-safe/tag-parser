@@ -33,21 +33,11 @@ const parseTree = parser.parse(text);
 
 HTMLParser
 ----------
-First include the module:
+In order to parse HTML:
 
 ```js
-const HTMLParser = require('tag-parser/html');
-```
-    
-then, instantiate the object:
-
-```js
+import { HTMLParser } from '@environment-safe/tag-parser/html'
 const parser = new HTMLParser();
-```
-    
-parse with:
-
-```js
 const parseTree = parser.parse('<html><head><title>Awesome!</title></head><body onload="callReady()"><h1>Congrats</h1><p>It worked.</p><!--a comment--></body></html>');
 ```    
 
@@ -116,9 +106,49 @@ which will produce:
 }
 ```
 
-TemplateParser
---------------
-TBD
+Template + TemplateParser
+-------------------------
+Parse and render simple value based [ES6 template](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) statements, but dynamically at runtime.
+
+```js
+import { Template } from '@environment-safe/tag-parser/template';
+const template = new Template(
+    'I had some ${foo} but made a ${bar}, now I need a ${baz}'
+);
+const rendered = template.render({
+    foo: 'mogwai',
+    bar: 'cake',
+    baz: 'gremlins'
+});
+```
+
+UBB + UBBParser
+---------------
+Parse and render [UBB Codes](https://wordcraft.infopop.cc/infopop/ubbcode.html) statements, but dynamically at runtime.
+
+```js
+import { UBB } from '@environment-safe/tag-parser/ubb';
+const template = new UBB(`+1!
+email me at: [email]foo@bar.baz[/email]
+[quote]Oh, you can’t help that. We're all mad here.[/quote]`);
+const rendered = template.render();
+```
+
+Mustache + MustacheParser
+-------------------------
+Parse and render simple value based [ES6 template](https://mustache.github.io/mustache.5.html) statements, but dynamically at runtime.
+
+```js
+import { Mustache } from '@environment-safe/tag-parser/mustache';
+const template = new Mustache('{{#repo}}<b>{{name}}</b>{{/repo}}');
+const rendered = template.render({
+    "repo": [
+        { "name": "resque" },
+        { "name": "hub" },
+        { "name": "rip" }
+    ]
+});
+```
 
 Testing
 -------

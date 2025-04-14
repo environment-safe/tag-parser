@@ -1,10 +1,4 @@
 import { SimpleParser } from './simple.mjs';
-import * as string from 'strangler';
-//import { ExtendedEmitter } from '@environment-safe/event-emitter';
-
-const contains = (arr, item)=>{
-    return arr.indexOf(item) !== -1;
-};
 
 export class TemplateParser extends SimpleParser{
     constructor(){

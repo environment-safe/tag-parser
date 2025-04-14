@@ -1,14 +1,22 @@
 /* global describe:false */
 import { chai } from '@environment-safe/chai';
 import { it } from '@open-automaton/moka';
-import { HTMLParser, TemplateParser, Template } from '../src/index.mjs';
+import { SimpleParser, TagParser } from '../src/index.mjs';
+import { HTMLParser } from '../src/html.mjs';
+import { UBB } from '../src/ubb.mjs';
+import { Mustache } from '../src/mustache.mjs';
+import { Template } from '../src/template.mjs';
 const should = chai.should();
 
 describe('module', ()=>{
     describe('performs a simple test suite', ()=>{
         it('loads', async ()=>{
-            should.exist({});
+            should.exist(SimpleParser);
+            should.exist(TagParser);
         });
+    });
+    
+    describe('HTML', ()=>{
         
         it('parses some HTML', async ()=>{
             const parser = new HTMLParser();
@@ -41,9 +49,9 @@ describe('module', ()=>{
         });
     });
     
-    describe('performs a simple test suite', ()=>{
+    describe('Template', ()=>{
         
-        it('parses and render template', async ()=>{
+        it('parses and renders template', async ()=>{
             const template = new Template('skdhasdjvvyeub ${foo} ds;dkf;d${bar}fhfh$ ${baz}kjs');
             const rendered = template.render({
                 foo: 'AAA',
@@ -52,6 +60,31 @@ describe('module', ()=>{
             });
             rendered.should.equal('skdhasdjvvyeub AAA ds;dkf;dBBBfhfh$ CCC');
         });
+    });
+    
+    describe('UBB', ()=>{
+        
+        it('parses and renders a UBB template', async ()=>{
+            const template = new UBB('[email]foo@bar.baz[/email][list][*]foo[*]bar[*]baz[/list]');
+            const rendered = template.render();
+            rendered.should.equal('<a href="email:">foo@bar.baz</a><ul><li>foo</li><li>bar</li><li>baz</li></ul>');
+        });
+    });
+    
+    describe('Mustache', ()=>{
+        
+        it('parses and renders a mustache template', async ()=>{
+            const template = new Mustache('{{#repo}}<b>{{name}}</b>{{/repo}}');
+            const rendered = template.render({
+                'repo': [
+                    { 'name': 'resque' },
+                    { 'name': 'hub' },
+                    { 'name': 'rip' }
+                ]
+            });
+            rendered.trim().should.equal('<b>resque</b><b>hub</b><b>rip</b>');
+        });
+        
     });
 });
 

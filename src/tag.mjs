@@ -8,7 +8,7 @@ const contains = (arr, item)=>{
 
 export class TagParser extends SimpleParser{
     constructor(environments, onComplete){
-        super(environments, onComplete)
+        super(environments, onComplete);
         this.attributeDelimiters = ['"'];
         this.on('parse', (node)=>{
             if(node.type == 'tag'){

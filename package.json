@@ -10,6 +10,22 @@
             "import": "./src/index.mjs",
             "require": "./dist/index.cjs"
         },
+        "./html": {
+            "import": "./src/html.mjs",
+            "require": "./dist/html.cjs"
+        },
+        "./ubb": {
+            "import": "./src/ubb.mjs",
+            "require": "./dist/ubb.cjs"
+        },
+        "./template": {
+            "import": "./src/template.mjs",
+            "require": "./dist/template.cjs"
+        },
+        "./mustache": {
+            "import": "./src/mustache.mjs",
+            "require": "./dist/mustache.cjs"
+        },
         "./package.json": {
             "import": "./package.json",
             "require": "./package.json"

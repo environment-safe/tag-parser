@@ -1,5 +1,4 @@
 import { ExtendedEmitter } from '@environment-safe/event-emitter';
-import * as string from 'strangler';
 
 function opener(item){
     return item[0] || item.opener || item;
@@ -17,7 +16,7 @@ function byKey(arr, key){
 
 export const startsWithAt = function(str, pos, sub){
     return str.indexOf(sub, pos-1) === pos;
-}
+};
 
 export class SimpleParser{
     constructor(environments, onComplete){
@@ -55,7 +54,14 @@ export class SimpleParser{
             }else this.content[environment.name] += job.text[job.lcv];
             return true;
         }else{
-            if(this.states[environment.name] = this.isTypeAt(job.text, job.lcv, environment.name)){ //beginning?
+            if(
+                // eslint-disable-next-line no-cond-assign
+                this.states[environment.name] = this.isTypeAt(
+                    job.text, 
+                    job.lcv, 
+                    environment.name
+                )
+            ){ //beginning?
                 this.content[environment.name] = '';
                 job.lcv += opener(this.states[environment.name]).length-1;
                 return true;
@@ -67,7 +73,7 @@ export class SimpleParser{
         var result;
         this.environmentsByKey[type].sentinels.forEach((sentinel)=>{
             var op = opener(sentinel);
-            var cls = closer(sentinel);
+            //var cls = closer(sentinel);
             if(result) return;
             if(
                 op[0] === string[position] && 
