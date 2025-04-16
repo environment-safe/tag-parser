@@ -58,7 +58,7 @@ describe('module', ()=>{
                 bar: 'BBB',
                 baz: 'CCC'
             });
-            rendered.should.equal('skdhasdjvvyeub AAA ds;dkf;dBBBfhfh$ CCC');
+            rendered.should.equal('skdhasdjvvyeub AAA ds;dkf;dBBBfhfh$ CCCkjs');
         });
     });
     

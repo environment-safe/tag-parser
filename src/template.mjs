@@ -17,6 +17,16 @@ export class TemplateParser extends SimpleParser{
         ]);
         this.attributeDelimiters = ['"'];
     }
+    
+    parse(xmlChars){
+        const parts = SimpleParser.prototype.parse.apply(this, [xmlChars]);
+        if(this.text){
+            parts[0].children.push(this.text);
+            this.text = '';
+        }
+        return parts;
+    }
+    
 }
 
 function pushChild(parent, child){
@@ -31,11 +41,12 @@ export class Template{
     }
     render(context){
         const kids = this.parsed[0].children;
-        return kids.map((item)=>{
+        const parts =  kids.map((item)=>{
             if(typeof item ==='string') return item;
             if(item.type === 'variable'){
                 return context[item.text.toLowerCase()];
             }
-        }).join('');
+        });
+        return parts.join('');
     }
 }
